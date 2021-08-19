@@ -1,14 +1,15 @@
-# Welcome to your CDK TypeScript project!
+# Welcome to Pipe Pump V2! 
 
-This is a blank project for TypeScript development with CDK.
+As an SDE Intern for the AWS CDK last summer, I created Pipe Pump to test out the new CDK Pipelines feature as well as demo my intern project, the CDK Synthetics module. Now, CDK Pipelines is Generally Available (yay!) and the API is significantly different from what it was a year ago. Pipe Pump V2 is thus an update on the original demo utilizing the new and improved CDK Pipelines. Enjoy!
 
-The `cdk.json` file tells the CDK Toolkit how to execute your app.
+## How To Use
 
-## Useful commands
+TBD. Check back when I've finished!
 
- * `npm run build`   compile typescript to js
- * `npm run watch`   watch for changes and compile
- * `npm run test`    perform the jest unit tests
- * `cdk deploy`      deploy this stack to your default AWS account/region
- * `cdk diff`        compare deployed stack with current state
- * `cdk synth`       emits the synthesized CloudFormation template
+## General Structure
+
+The structure of the pipeline is Source -> Build -> Update Pipeline -> Assets -> Sandbox -> Test -> Prod.
+
+The project uses the AWS CDK. The modules used are AWS Pipelines, AWS CodePipeline, AWS Lambda, AWS ApiGateway, AWS Synthetics, and AWS SNS.
+
+Happy Piping!
