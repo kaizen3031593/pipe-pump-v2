@@ -3,7 +3,7 @@ import * as apigw from '@aws-cdk/aws-apigateway';
 import * as cdk from '@aws-cdk/core';
 import * as path from 'path';
 
-export class PipeStack extends cdk.Stack {
+export class LambdaStack extends cdk.Stack {
   constructor(scope: cdk.Construct, id: string, props?: cdk.StackProps) {
     super(scope, id, props);
 
