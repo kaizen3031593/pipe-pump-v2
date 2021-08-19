@@ -2,7 +2,7 @@ import { CanaryStack } from '../lib/canary-stack';
 import { LambdaStack } from '../lib/lambda-stack';
 import * as cdk from '@aws-cdk/core';
 import * as pipelines from '@aws-cdk/pipelines';
-import { githubUser, githubRepo, githubBranch, codeStarConnectionArn, awsAccount } from '../private/configuration';
+import { githubUser, githubRepo, githubBranch, codeStarConnectionArn, awsAccount, awsRegion } from '../private/configuration';
 
 /**
  * Stack to hold the pipeline
@@ -27,21 +27,21 @@ export class MyPipelineStack extends cdk.Stack {
     pipeline.addStage(new MyApplication(this, 'Sandbox', {
       env: {
         account: awsAccount,
-        region: 'us-east-1',
+        region: awsRegion,
       }
     }));
 
     pipeline.addStage(new MyTestApp(this, 'Test', {
       env: {
         account: awsAccount,
-        region: 'us-east-1',
+        region: awsRegion,
       }
     }));
 
     pipeline.addStage(new MyProdApp(this, 'Prod', {
       env: {
         account: awsAccount,
-        region: 'us-east-1',
+        region: awsRegion,
       }
     }))
   }
