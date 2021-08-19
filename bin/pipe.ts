@@ -7,7 +7,7 @@ import { githubUser, githubRepo, githubBranch, codeStarConnectionArn, awsAccount
 /**
  * Stack to hold the pipeline
  */
-class MyPipelineStack extends cdk.Stack {
+export class MyPipelineStack extends cdk.Stack {
   constructor(scope: cdk.Construct, id: string, props?: cdk.StackProps) {
     super(scope, id, props);
 
@@ -24,12 +24,26 @@ class MyPipelineStack extends cdk.Stack {
       }),
     });
 
-    pipeline.addStage(new MyApplication(this, 'Prod', {
+    pipeline.addStage(new MyApplication(this, 'Sandbox', {
       env: {
         account: awsAccount,
         region: 'us-east-1',
       }
     }));
+
+    pipeline.addStage(new MyTestApp(this, 'Test', {
+      env: {
+        account: awsAccount,
+        region: 'us-east-1',
+      }
+    }));
+
+    pipeline.addStage(new MyProdApp(this, 'Prod', {
+      env: {
+        account: awsAccount,
+        region: 'us-east-1',
+      }
+    }))
   }
 }
 
@@ -37,7 +51,22 @@ class MyApplication extends cdk.Stage {
   constructor(scope: cdk.Construct, id: string, props?: cdk.StageProps) {
     super(scope, id, props);
 
-    const canaryStack = new CanaryStack(this, 'Canary');
-    const lambdaStack = new LambdaStack(this, 'Lambda');
+    const lambdaStack = new LambdaStack(this, 'api-endpoint');
+  }
+}
+
+class MyTestApp extends cdk.Stage {
+  constructor(scope: cdk.Construct, id: string, props?: cdk.StageProps) {
+    super(scope, id, props);
+
+    new CanaryStack(this, 'test-endpoint');
+  }
+}
+
+class MyProdApp extends cdk.Stage {
+  constructor(scope: cdk.Construct, id: string, props?: cdk.StageProps) {
+    super(scope, id, props);
+
+    new LambdaStack(this, 'prod-endpoint');
   }
 }

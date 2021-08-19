@@ -14,9 +14,11 @@ export class LambdaStack extends cdk.Stack {
     });
 
     // Add API Gateway backed by Lambda
-    new apigw.LambdaRestApi(this, 'Endpoint', {
+    const api = new apigw.LambdaRestApi(this, 'Endpoint', {
       description: 'first endpoint',
       handler: dateFn,
     });
+
+    new cdk.CfnOutput(this, 'apiUrl', {value: api.url});
   }
 }
