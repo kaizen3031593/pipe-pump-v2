@@ -43,7 +43,12 @@ export class MyPipelineStack extends cdk.Stack {
         account: awsAccount,
         region: awsRegion,
       }
-    }))
+    }), {
+      pre: [
+        new pipelines.ManualApprovalStep('Pause'),
+      ]
+    }
+    );
   }
 }
 
